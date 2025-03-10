@@ -7,14 +7,13 @@ import { createChangingText } from "./components/ChangingText";
 
 import BG from "/assets/SelectionPage/BG.png";
 
-export const createSelectionPage = async (containerId: string, backgroundColor: string) => {
+export const createSelectionPage = async (containerId: string, backgroundColor: string): Promise<Application> => {
     const app = new Application();
     await app.init({ background: backgroundColor, resizeTo: window });
 
     const container = document.getElementById(containerId);
     if (!container) {
-        console.error(`Container with ID "${containerId}" not found.`);
-        return;
+        throw new Error(`Container with ID "${containerId}" not found.`);
     }
     container.appendChild(app.canvas);
 
@@ -24,8 +23,17 @@ export const createSelectionPage = async (containerId: string, backgroundColor: 
 
     const { icon, resizeIcon } = await createMainIcon();
     const { text, resizeText: resizeGreetingText } = await createGreetingText();
-    const { buttonContainer, resizeButton } = await createButton();
-    const { textContainer, updateText, resizeText: resizeChangingText } = await createChangingText();
+    const { textContainer, updateText, resizeText: resizeChangingText, getCurrentText } = await createChangingText();
+
+    const { buttonContainer, resizeButton } = await createButton(() => {
+        const selectedText = getCurrentText();
+        if (selectedText === "а что это значит?") {
+            localStorage.setItem("selectedText", selectedText);
+            window.location.href = "#response";
+        } else {
+        }
+    });
+    
     const { sidesContainer, resizeSides } = await createButtonSides(updateText);
 
     const resizeElements = () => {
@@ -56,4 +64,6 @@ export const createSelectionPage = async (containerId: string, backgroundColor: 
     ticker.start();
 
     resizeElements();
+    
+    return app;
 };

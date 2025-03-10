@@ -31,15 +31,17 @@ export const createChangingText = async () => {
         text.text = options[currentIndex];
     };
 
+    const getCurrentText = () => options[currentIndex];
+
     const resizeText = (bg: Sprite) => {
         if (!bg) return;
 
         const scaleFactor = Math.min(bg.width / 8, bg.height / 10);
-        text.style.fontSize = Math.max(32, scaleFactor);
+        text.style.fontSize = Math.max(0, scaleFactor);
 
         textContainer.position.set(bg.x, bg.y + bg.height / 10);
-        text.position.set(0, 0);
+        text.position.set(0, -50);
     };
 
-    return { textContainer, updateText, resizeText };
+    return { textContainer, updateText, resizeText, getCurrentText };
 };

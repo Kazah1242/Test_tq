@@ -9,18 +9,18 @@ export const createButtonSides = async (updateText: (direction: "left" | "right"
         let isPressed = false;
         const baseScale = target.scale.x;
 
-        target.addEventListener("pointerdown", () => {
+        target.on("pointerdown", () => {
             isPressed = true;
             animateScale(target, baseScale * 0.9);
         });
 
-        target.addEventListener("pointerup", () => {
+        target.on("pointerup", () => {
             isPressed = false;
             animateScale(target, baseScale);
             updateText(direction);
         });
 
-        target.addEventListener("pointerupoutside", () => {
+        target.on("pointerupoutside", () => {
             isPressed = false;
             animateScale(target, baseScale);
         });

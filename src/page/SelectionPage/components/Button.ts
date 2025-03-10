@@ -2,7 +2,7 @@ import { Assets, Sprite, Text, TextStyle, Container, Ticker } from "pixi.js";
 import RuslanDisplay from "/assets/fonts/RuslanDisplay.ttf";
 import ButtonTexture from "/assets/SelectionPage/components/Button.png";
 
-export const createButton = async () => {
+export const createButton = async (onSelect?: () => void) => {
     await Assets.load(RuslanDisplay);
     const texture = await Assets.load(ButtonTexture);
 
@@ -33,37 +33,43 @@ export const createButton = async () => {
 
         const scaleFactor = Math.min(bg.width / 2.5 / button.texture.width, 0.8);
         button.scale.set(scaleFactor);
-        defaultScale = scaleFactor; 
+        defaultScale = scaleFactor;
 
         const newFontSize = Math.min(bg.width / 18, bg.height / 14);
-        buttonText.style.fontSize = Math.max(28, newFontSize);
-
-        buttonText.position.set(0, 0);
+        buttonText.style.fontSize = Math.max(0, newFontSize);
+        buttonText.position.set(0, -4);
     };
 
     button.eventMode = "static";
     button.cursor = "pointer";
 
-    button.addEventListener("pointerdown", () => {
-        animateBounce(button, defaultScale * 0.9, defaultScale);
+    button.on("pointerdown", () => {
+        animateBounce(button, buttonText, defaultScale * 0.9, defaultScale);
+
+        if (onSelect) {
+            onSelect();
+        }
     });
 
     return { buttonContainer, resizeButton };
 };
 
-const animateBounce = (button: Sprite, pressedScale: number, normalScale: number) => {
+const animateBounce = (button: Sprite, buttonText: Text, pressedScale: number, normalScale: number) => {
     const ticker = new Ticker();
     let step = 0;
 
     ticker.add(() => {
         if (step === 0) {
             button.scale.set(pressedScale);
+            buttonText.scale.set(pressedScale);
             step++;
         } else if (step < 5) {
             button.scale.set(button.scale.x + (normalScale - pressedScale) * 0.2);
+            buttonText.scale.set(buttonText.scale.x + (normalScale - pressedScale) * 0.2);
             step++;
         } else {
             button.scale.set(normalScale);
+            buttonText.scale.set(normalScale);
             ticker.stop();
         }
     });
