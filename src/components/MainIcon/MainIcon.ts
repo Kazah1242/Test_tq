@@ -1,5 +1,5 @@
 import { Assets, Sprite, Ticker } from "pixi.js";
-import MainIcon from "/assets/SelectionPage/components/MainIcon.png";
+import MainIcon from "/assets/MainIcon/MainIcon.png";
 
 export async function createMainIcon() {
   const texture = await Assets.load(MainIcon);

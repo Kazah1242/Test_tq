@@ -1,7 +1,7 @@
 import { Application, Assets, Sprite, Ticker } from "pixi.js";
-import { createMainIcon } from "./components/MainIcon";
-import { createGreetingText } from "./components/GreetingText";
-import { createButton } from "./components/Button";
+import { createMainIcon } from "@components/MainIcon/MainIcon";
+import { createGreetingText } from "@components/GreetingText/GreetingText";
+import { createButton } from "@components/Button/Button";
 import { createButtonSides } from "./components/ButtonSides";
 import { createChangingText } from "./components/ChangingText";
 
@@ -31,6 +31,7 @@ export const createSelectionPage = async (containerId: string, backgroundColor: 
             localStorage.setItem("selectedText", selectedText);
             window.location.href = "#response";
         } else {
+            window.location.href = "#error";
         }
     });
     

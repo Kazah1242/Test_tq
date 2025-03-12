@@ -1,7 +1,7 @@
 import { Application, Assets, Sprite } from "pixi.js";
-import { createMainIcon } from "../SelectionPage/components/MainIcon";
-import { createGreetingText } from "../SelectionPage/components/GreetingText";
-import { createBackButton } from "./components/BackButton";
+import { createMainIcon } from "@components/MainIcon/MainIcon";
+import { createGreetingText } from "@components/GreetingText/GreetingText";    
+import { createBackButton } from "@components/BackButton/BackButton";
 import { createTextInsideBackground } from "./components/TextInsideBackground";  
 import { createStars } from "./components/Stars";
 import BG from "/assets/ResponsePage/BG.png"; 

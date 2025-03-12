@@ -1,6 +1,7 @@
 import { Application } from "pixi.js";
 import { createSelectionPage } from "./page/SelectionPage/SelectionPage";
 import { createResponsePage } from "./page/ResponsePage/ResponsePage";
+import { createErrorPage } from "./page/ErrorPage/ErrorPage";
 
 const backgroundColor = "#39373a";
 const containerId = "pixi-container";
@@ -19,7 +20,6 @@ const transition = async (oldApp: Application | null, createNewPage: () => Promi
     document.getElementById(containerId)!.innerHTML = "";
     const newApp = await createNewPage();
 
-    // Fade in
     newApp.stage.alpha = 0;
     const fadeIn = async () => {
         for (let alpha = 0; alpha <= 1; alpha += 0.05) {
@@ -40,12 +40,16 @@ const loadPage = async () => {
         if (route === "#response") {
             currentApp = await transition(currentApp, () => 
                 createResponsePage(containerId, backgroundColor));
+        } else if (route === "#error") {
+            currentApp = await transition(currentApp, () => 
+                createErrorPage(containerId, backgroundColor));
         } else {
             currentApp = await transition(currentApp, () => 
                 createSelectionPage(containerId, backgroundColor));
         }
     } catch (error) {
         console.error('Failed to load page:', error);
+        window.location.href = "#error";
     }
 };
 

@@ -1,5 +1,5 @@
 import { Assets, Text, TextStyle, Sprite } from "pixi.js";
-import RuslanDisplay from "/assets/fonts/RuslanDisplay.ttf";
+import RuslanDisplay from "/assets/Fonts/RuslanDisplay.ttf";
 
 export const createGreetingText = async () => {
     await Assets.load(RuslanDisplay);

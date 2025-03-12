@@ -1,6 +1,6 @@
 import { Assets, Sprite, Text, TextStyle, Container, Ticker } from "pixi.js";
-import RuslanDisplay from "/assets/fonts/RuslanDisplay.ttf";
-import ButtonTexture from "/assets/SelectionPage/components/Button.png";
+import RuslanDisplay from "/assets/Fonts/RuslanDisplay.ttf";
+import ButtonTexture from "/assets/Button/Button.png";
 
 export const createButton = async (onSelect?: () => void) => {
     await Assets.load(RuslanDisplay);

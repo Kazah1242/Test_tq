@@ -1,5 +1,5 @@
 import { Sprite, Assets, Container } from "pixi.js";
-import ButtonTexture from "/assets/ResponsePage/components/Group10.png";
+import ButtonTexture from "/assets/BackButton/Group10.png";
 
 export const createBackButton = async (onClick: () => void) => {
     const texture = await Assets.load(ButtonTexture);

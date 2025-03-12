@@ -1,9 +1,15 @@
 import { defineConfig } from "vite";
+import path from "path";
 
-// https://vite.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, './src/components'),
+      '@page': path.resolve(__dirname, './src/page')
+    }
+  },
   server: {
-    port: 8080,
+    port: 5173,
     open: true,
   },
 });
